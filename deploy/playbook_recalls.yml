@@ -5,10 +5,18 @@
         debug:
           msg: "inventory_hostname {{ inventory_hostname }}"
 
-      - name: copy public
+      - name: copy thumbs
         copy:
-          src: ~/WebstormProjects/laoshijia/public
-          dest: /root/projects/laoshijia/
+          src: ~/WebstormProjects/laoshijia/public/images/thumbs
+          dest: /root/projects/laoshijia/public/images
+          owner: root
+          group: root
+#          mode: 0777
+
+      - name: copy fulls
+        copy:
+          src: ~/WebstormProjects/laoshijia/public/images/fulls
+          dest: /root/projects/laoshijia/public/images
           owner: root
           group: root
 #          mode: 0777
