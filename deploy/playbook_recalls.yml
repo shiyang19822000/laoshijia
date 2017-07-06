@@ -1,0 +1,14 @@
+- hosts: ali
+  user: root
+  tasks:
+      - name: debug
+        debug:
+          msg: "inventory_hostname {{ inventory_hostname }}"
+
+      - name: copy public
+        copy:
+          src: ~/WebstormProjects/laoshijia/public
+          dest: /root/projects/laoshijia/
+          owner: root
+          group: root
+#          mode: 0777

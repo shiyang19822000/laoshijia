@@ -1,0 +1,189 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title><%= title %></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <!--[if lte IE 8]>
+    <script src="css/ie/html5shiv.js"></script><![endif]-->
+    <script src="javascripts/jquery.min.js"></script>
+    <script src="javascripts/skel.min.js"></script>
+    <noscript>
+        <link rel="stylesheet" href="css/skel.css"/>
+        <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="css/style-xlarge.css"/>
+    </noscript>
+    <!--[if lte IE 8]>
+    <link rel="stylesheet" href="css/ie/v8.css"/><![endif]-->
+</head>
+<body id="top">
+
+<!-- Header -->
+<header id="header">
+    <a href="#" class="image avatar"><img src="images/logo1.jpeg" alt=""/></a>
+    <h1>
+        <%= body %>
+    </h1>
+</header>
+
+<!-- Main -->
+<div id="main">
+
+    <!-- One -->
+    <section id="one">
+        <header class="major">
+            <h2>大院的变迁<br/>
+                记录咱们身边发生的事情.</h2>
+        </header>
+        <p>
+            <%= body1 %>
+        </p>
+        <ul class="actions">
+            <li><a href="#" class="button">更多故事</a></li>
+        </ul>
+    </section>
+
+    <!-- Two -->
+    <section id="two">
+        <h2>相册</h2>
+        <ul class="actions">
+            <li><a href="#clearcache" id="clear_cache" class="button">刷新相册</a></li>
+            <!--<li><a href="#loadcache" id="load_cache" class="button">加载相册</a></li>-->
+        </ul>
+        <div class="row">
+
+        </div>
+    </section>
+
+    <!-- Three -->
+    <section id="three">
+        <h2>留言墙</h2>
+        <p>
+            <%= body2 %>
+        </p>
+        <div class="row">
+            <div class="8u 12u$(small)">
+                <form method="post" action="#">
+                    <div class="row uniform 50%">
+                        <div class="6u 12u$(xsmall)"><input type="text" name="name" id="name" placeholder="姓名"/></div>
+                        <div class="6u$ 12u$(xsmall)"><input type="email" name="email" id="email" placeholder="邮箱"/>
+                        </div>
+                        <div class="12u$"><textarea name="message" id="message" placeholder="留言内容" rows="4"></textarea>
+                        </div>
+                    </div>
+                </form>
+                <ul class="actions">
+                    <li><input type="submit" value="涂鸦留言"/></li>
+                </ul>
+            </div>
+            <div class="4u$ 12u$(small)">
+                <ul class="labeled-icons">
+                    <li>
+                        <h3 class="icon fa-home"><span class="label">地址</span></h3>
+                        朝阳区.<br/>
+                        北京市<br/>
+                        中国
+                    </li>
+                    <li>
+                        <h3 class="icon fa-mobile"><span class="label">手机</span></h3>
+                        000-00000000
+                    </li>
+                    <li>
+                        <h3 class="icon fa-envelope-o"><span class="label">邮箱</span></h3>
+                        <a href="#">dayuan@126.com</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<!-- Footer -->
+<footer id="footer">
+    <ul class="icons">
+        <li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+        <li><a href="#" class="icon fa-github"><span class="label">Github</span></a></li>
+        <li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+        <li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+    </ul>
+    <ul class="copyright">
+        <li>&copy; Untitled</li>
+        <li>Design: <a href="#">大院</a></li>
+    </ul>
+</footer>
+
+<!-- JavaScript -->
+<script type="text/javascript">
+    $(function () {
+
+        // $("#load_cache").click(function (e) {
+        $(window).load(function() {
+            // $('#two .row').autobrowse('flush');
+            $.ajax({
+                 type: "get",
+                 url: "http://127.0.0.1:3000/servlet/recall?offset=0&limit=1",
+                 data: "",
+                 success: function (response) {
+                     var markup = '';
+                     for (var i = 0; i < response.results.length; i++) {
+                         if (i % 2 == 0) {
+                             markup += '<article class="6u 12u$(xsmall) work-item">';
+                         } else {
+                             markup += '<article class="6u$ 12u$(xsmall) work-item">';
+                         }
+                         markup += '<a href="' + response.results[i].full + '" class="image fit thumb" style="outline: 0px;"><img src="' + response.results[i].thumb + '" alt="" title=""/></a>';
+                         markup += '<h3>' + response.results[i].title + '</h3>';
+                         markup += '<p>' + response.results[i].desc + '</p>';
+                         markup += '</article>';
+                     };
+                     $("#two .row").html(markup);
+                 }
+             });
+         });
+
+        $("#clear_cache").click(function (e) {
+            e.preventDefault();
+            $('#two .row').autobrowse('flush');
+            window.location.reload();
+        });
+
+        $("#two .row").autobrowse({
+                url: function (offset) {
+                     $('#two .row').autobrowse('flush');
+                    return "http://127.0.0.1:3000/servlet/recall?offset=" + offset + "&limit=1";
+                },
+                template: function (response) {
+                    var markup = '';
+                    for (var i = 0; i < response.results.length; i++) {
+                        if (i % 2 == 0) {
+                            markup += '<article class="6u 12u$(xsmall) work-item">';
+                        } else {
+                            markup += '<article class="6u$ 12u$(xsmall) work-item">';
+                        }
+                        markup += '<a href="' + response.results[i].full + '" class="image fit thumb" style="outline: 0px;"><img src="' + response.results[i].thumb + '" alt="" title=""/></a>';
+                        markup += '<h3>' + response.results[i].title + '</h3>';
+                        markup += '<p>' + response.results[i].desc + '</p>';
+                        markup += '</article>';
+                    };
+                    return markup;
+                },
+                itemsReturned: function (response) {
+                    return response.results.length;
+                },
+                offset: 1,
+                max: 10000,
+                loader: '<div class="loader"></div>',
+                useCache: true,
+                expiration: 1,
+            });
+    });
+</script>
+<script type="text/javascript" src="javascripts/jquery.esn.autobrowse.js"></script>
+<script type="text/javascript" src="javascripts/jstorage.js"></script>
+<script src="javascripts/jquery.poptrox.min.js"></script>
+<script src="javascripts/init.js"></script>
+
+</body>
+</html>

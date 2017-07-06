@@ -1,0 +1,94 @@
+- hosts: ali
+  user: root
+  tasks:
+      - name: debug
+        debug:
+          msg: "inventory_hostname {{ inventory_hostname }}"
+
+      - name: copy app.js
+        copy:
+          src: ~/WebstormProjects/laoshijia/app.js
+          dest: /root/projects/laoshijia/
+          owner: root
+          group: root
+          # mode: 0777
+
+      - name: copy package.json
+        copy:
+          src: ~/WebstormProjects/laoshijia/package.json
+          dest: /root/projects/laoshijia/
+          owner: root
+          group: root
+          # mode: 0777
+
+      - name: copy bin
+        copy:
+          src: ~/WebstormProjects/laoshijia/bin
+          dest: /root/projects/laoshijia/
+          owner: root
+          group: root
+          # mode: 0777
+
+      - name: copy controllers
+        copy:
+          src: ~/WebstormProjects/laoshijia/controllers
+          dest: /root/projects/laoshijia/
+          owner: root
+          group: root
+          # mode: 0777
+
+      - name: copy deploy
+        copy:
+          src: ~/WebstormProjects/laoshijia/deploy
+          dest: /root/projects/laoshijia/
+          owner: root
+          group: root
+          # mode: 0777
+
+      - name: copy models
+        copy:
+          src: ~/WebstormProjects/laoshijia/models
+          dest: /root/projects/laoshijia/
+          owner: root
+          group: root
+          # mode: 0777
+
+#      - name: copy node_modules
+#        copy:
+#          src: ~/WebstormProjects/laoshijia/node_modules
+#          dest: /root/projects/laoshijia/
+#          owner: root
+#          group: root
+          # mode: 0777
+
+#      - name: copy public
+#        copy:
+#          src: ~/WebstormProjects/laoshijia/public
+#          dest: /root/projects/laoshijia/
+#          owner: root
+#          group: root
+           # mode: 0777
+
+      - name: copy routes
+        copy:
+          src: ~/WebstormProjects/laoshijia/routes
+          dest: /root/projects/laoshijia/
+          owner: root
+          group: root
+          # mode: 0777
+
+      - name: copy services
+        copy:
+          src: ~/WebstormProjects/laoshijia/services
+          dest: /root/projects/laoshijia/
+          owner: root
+          group: root
+          # mode: 0777
+
+      - name: copy views
+        copy:
+          src: ~/WebstormProjects/laoshijia/views
+          dest: /root/projects/laoshijia/
+          owner: root
+          group: root
+          # mode: 0777
