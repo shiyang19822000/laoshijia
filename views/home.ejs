@@ -123,7 +123,7 @@
             // $('#two .row').autobrowse('flush');
             $.ajax({
                  type: "get",
-                 url: "http://127.0.0.1:3000/servlet/recall?offset=0&limit=1",
+                 url: "http://localhost:3000/servlet/recall?offset=0&limit=1",
                  data: "",
                  success: function (response) {
                      var markup = '';
@@ -152,7 +152,7 @@
         $("#two .row").autobrowse({
                 url: function (offset) {
                      $('#two .row').autobrowse('flush');
-                    return "http://127.0.0.1:3000/servlet/recall?offset=" + offset + "&limit=1";
+                    return "http://localhost:3000/servlet/recall?offset=" + offset + "&limit=1";
                 },
                 template: function (response) {
                     var markup = '';
