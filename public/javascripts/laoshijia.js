@@ -51,8 +51,8 @@ function wordswall(id, title, desc, markup) {
     $.ajax({
         type: "get",
         async : false,
-        url: "http://localhost:3000/servlet/wordswall?recall=" + id + "offset=0&limit=3",
-        // url: "http://114.215.29.0:3000/servlet/wordswall?recall=" + id + "offset=0&limit=3",
+        url: "http://localhost:3000/servlet/wordswall?recall_id=" + id + "&offset=0&limit=3",
+        // url: "http://114.215.29.0:3000/servlet/wordswall?recall_id=" + id + "&offset=0&limit=3",
         data: "",
         success: function (response) {
             for (var i = 0; i < response.results.length; i++) {
@@ -78,8 +78,6 @@ function savewords(obj) {
         data:{
             recall : obj.id,
             words : $("#message" + obj.id).val(),
-            username: "shiyang",
-            password: "1qaz@wsX"
         },
         type:'post',
         cache:false,
