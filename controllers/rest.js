@@ -18,6 +18,15 @@ function rest() {
             callback(null, res.body);
         });
     };
+    this.brokeUnirestPost = function (url, params, callback) {
+        unirest.post(url)
+            .headers({'Accept': 'application/json', 'Content-Type': 'application/json'})
+            .send(params)
+            .end(function (res) {
+                console.log(res.body);
+                callback(null, res.body)
+            });
+    };
 };
 
 module.exports = rest;

@@ -46,7 +46,7 @@
 
     <!-- Two -->
     <section id="two">
-        <h2>相册</h2>
+        <h2>照片墙</h2>
         <ul class="actions">
             <li><a href="#clearcache" id="clear_cache" class="button">刷新相册</a></li>
             <!--<li><a href="#loadcache" id="load_cache" class="button">加载相册</a></li>-->
@@ -67,10 +67,8 @@
                 <form method="post" action="#">
                     <div class="row uniform 50%">
                         <div class="6u 12u$(xsmall)"><input type="text" name="name" id="name" placeholder="姓名"/></div>
-                        <div class="6u$ 12u$(xsmall)"><input type="email" name="email" id="email" placeholder="邮箱"/>
-                        </div>
-                        <div class="12u$"><textarea name="message" id="message" placeholder="留言内容" rows="4"></textarea>
-                        </div>
+                        <div class="6u$ 12u$(xsmall)"><input type="email" name="email" id="email" placeholder="邮箱"/></div>
+                        <div class="12u$"><textarea name="message" id="message" placeholder="留言内容" rows="4"></textarea></div>
                     </div>
                 </form>
                 <ul class="actions">
@@ -115,6 +113,7 @@
 </footer>
 
 <!-- JavaScript -->
+<script src="javascripts/laoshijia.js"></script>
 <script type="text/javascript">
     $(function () {
 
@@ -123,20 +122,15 @@
             // $('#two .row').autobrowse('flush');
             $.ajax({
                  type: "get",
-                 url: "http://localhost:3000/servlet/recall?offset=0&limit=1",
+                url: "http://localhost:3000/servlet/recall?offset=0&limit=2",
+//                url: "http://114.215.29.0:3000/servlet/recall?offset=0&limit=2",
                  data: "",
                  success: function (response) {
                      var markup = '';
                      for (var i = 0; i < response.results.length; i++) {
-                         if (i % 2 == 0) {
-                             markup += '<article class="6u 12u$(xsmall) work-item">';
-                         } else {
-                             markup += '<article class="6u$ 12u$(xsmall) work-item">';
-                         }
-                         markup += '<a href="' + response.results[i].full + '" class="image fit thumb" style="outline: 0px;"><img src="' + response.results[i].thumb + '" alt="" title=""/></a>';
-                         markup += '<h3>' + response.results[i].title + '</h3>';
-                         markup += '<p>' + response.results[i].desc + '</p>';
-                         markup += '</article>';
+                         markup = picwall(response.results[i].full, response.results[i].thumb, markup)
+                         markup = wordswall(response.results[i].id, response.results[i].title, response.results[i].desc, markup);
+                         // markup = wordswall(markup);
                      };
                      $("#two .row").html(markup);
                  }
@@ -153,26 +147,21 @@
                 url: function (offset) {
                      $('#two .row').autobrowse('flush');
                     return "http://localhost:3000/servlet/recall?offset=" + offset + "&limit=1";
+//                    return "http://114.215.29.0:3000/servlet/recall?offset=" + offset + "&limit=1";
                 },
                 template: function (response) {
                     var markup = '';
                     for (var i = 0; i < response.results.length; i++) {
-                        if (i % 2 == 0) {
-                            markup += '<article class="6u 12u$(xsmall) work-item">';
-                        } else {
-                            markup += '<article class="6u$ 12u$(xsmall) work-item">';
-                        }
-                        markup += '<a href="' + response.results[i].full + '" class="image fit thumb" style="outline: 0px;"><img src="' + response.results[i].thumb + '" alt="" title=""/></a>';
-                        markup += '<h3>' + response.results[i].title + '</h3>';
-                        markup += '<p>' + response.results[i].desc + '</p>';
-                        markup += '</article>';
+                        markup = picwall(response.results[i].full, response.results[i].thumb, markup)
+                        markup = wordswall(response.results[i].id, response.results[i].title, response.results[i].desc, markup);
+                        // markup += '</article>';
                     };
                     return markup;
                 },
                 itemsReturned: function (response) {
                     return response.results.length;
                 },
-                offset: 1,
+                offset: 2,
                 max: 10000,
                 loader: '<div class="loader"></div>',
                 useCache: true,

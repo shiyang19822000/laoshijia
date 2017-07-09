@@ -92,3 +92,51 @@
           owner: root
           group: root
           # mode: 0777
+
+      - name: copy public/css
+        copy:
+          src: ~/WebstormProjects/laoshijia/public/css
+          dest: /root/projects/laoshijia/public
+          owner: root
+          group: root
+          # mode: 0777
+
+      - name: copy public/fonts
+        copy:
+          src: ~/WebstormProjects/laoshijia/public/fonts
+          dest: /root/projects/laoshijia/public
+          owner: root
+          group: root
+          # mode: 0777
+
+      - name: copy public/ie
+        copy:
+          src: ~/WebstormProjects/laoshijia/public/ie
+          dest: /root/projects/laoshijia/public
+          owner: root
+          group: root
+          # mode: 0777
+
+      - name: copy public/javascripts
+        copy:
+          src: ~/WebstormProjects/laoshijia/public/javascripts
+          dest: /root/projects/laoshijia/public
+          owner: root
+          group: root
+          # mode: 0777
+
+      - name: copy public/sass
+        copy:
+          src: ~/WebstormProjects/laoshijia/public/sass
+          dest: /root/projects/laoshijia/public
+          owner: root
+          group: root
+          # mode: 0777
+
+      - name: copy public/stylesheets
+        copy:
+          src: ~/WebstormProjects/laoshijia/public/stylesheets
+          dest: /root/projects/laoshijia/public
+          owner: root
+          group: root
+          # mode: 0777
