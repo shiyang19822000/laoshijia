@@ -6,7 +6,8 @@
     <meta name="description" content=""/>
     <meta name="keywords" content=""/>
     <!--[if lte IE 8]>
-    <script src="css/ie/html5shiv.js"></script><![endif]-->
+    <script src="css/ie/html5shiv.js"></script>
+    <![endif]-->
     <script src="javascripts/jquery.min.js"></script>
     <script src="javascripts/skel.min.js"></script>
     <noscript>
@@ -15,8 +16,22 @@
         <link rel="stylesheet" href="css/style-xlarge.css"/>
     </noscript>
     <!--[if lte IE 8]>
-    <link rel="stylesheet" href="css/ie/v8.css"/><![endif]-->
+    <link rel="stylesheet" href="css/ie/v8.css"/>
+    <![endif]-->
+
+    <!-- Amaran -->
+    <link rel="stylesheet" href="css/amaran/amaran.min.css">
+    <link rel="stylesheet" href="css/amaran/animate.min.css">
+    <!--<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">-->
+    <!-- Ignore styles below you dont need for basic setup -->
+    <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">-->
+    <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>-->
+    <!--<link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>-->
+    <!--<link rel="stylesheet" href="css/amaran/global.css"/>-->
+    <!-- Ignored -->
+    <!-- Amaran -->
 </head>
+
 <body id="top">
 
 <!-- Header -->
@@ -49,7 +64,6 @@
         <h2>照片墙</h2>
         <ul class="actions">
             <li><a href="#clearcache" id="clear_cache" class="button">刷新相册</a></li>
-            <!--<li><a href="#loadcache" id="load_cache" class="button">加载相册</a></li>-->
         </ul>
         <div class="row">
 
@@ -114,12 +128,22 @@
 
 <!-- JavaScript -->
 <script src="javascripts/laoshijia.js"></script>
-<script type="text/javascript">
-    $(function () {
+<script type="text/javascript" src="javascripts/jquery.esn.autobrowse.js"></script>
+<script type="text/javascript" src="javascripts/jstorage.js"></script>
+<script src="javascripts/jquery.poptrox.min.js"></script>
+<script src="javascripts/init.js"></script>
+<script src="javascripts/amaran/jquery.amaran.js"></script>
 
-        // $("#load_cache").click(function (e) {
+<script type="text/javascript">
+
+    $(function () {
+        $.amaran({
+            'message'           :'大院: 您回来啦!',
+            'cssanimationIn'    :'swing',
+            'cssanimationOut'   :'bounceOut'
+        });
+
         $(window).load(function() {
-            // $('#two .row').autobrowse('flush');
             $.ajax({
                  type: "get",
                 url: "http://localhost:3000/servlet/recall?offset=0&limit=2",
@@ -130,7 +154,6 @@
                      for (var i = 0; i < response.results.length; i++) {
                          markup = picwall(response.results[i].full, response.results[i].thumb, markup)
                          markup = wordswall(response.results[i].id, response.results[i].title, response.results[i].desc, markup);
-                         // markup = wordswall(markup);
                      };
                      $("#two .row").html(markup);
                  }
@@ -154,7 +177,6 @@
                     for (var i = 0; i < response.results.length; i++) {
                         markup = picwall(response.results[i].full, response.results[i].thumb, markup)
                         markup = wordswall(response.results[i].id, response.results[i].title, response.results[i].desc, markup);
-                        // markup += '</article>';
                     };
                     return markup;
                 },
@@ -169,10 +191,6 @@
             });
     });
 </script>
-<script type="text/javascript" src="javascripts/jquery.esn.autobrowse.js"></script>
-<script type="text/javascript" src="javascripts/jstorage.js"></script>
-<script src="javascripts/jquery.poptrox.min.js"></script>
-<script src="javascripts/init.js"></script>
 
 </body>
 </html>
