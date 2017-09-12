@@ -151,8 +151,9 @@ function weather() {
     });
 };
 
-var url_courtyard = "http://localhost:3000";
+// var url_courtyard = "http://localhost:3000";
 // var url_courtyard = "http://114.215.29.0:3000";
+var url_courtyard = "http://ali.shangpinmatou.com:3000";
 
 function test(obj) {
     alert(obj.id);
@@ -178,5 +179,4 @@ function test(obj) {
     // markup += '<a href="#" class="icon fa-arrow-circle-o-right"><span class="label">上一页</span></a>';
     // markup += '<textarea name="demo-message" id="demo-message" placeholder="留言" rows="1"></textarea>';
     // markup += '</article>';
-
 };

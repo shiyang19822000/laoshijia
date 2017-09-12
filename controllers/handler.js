@@ -29,5 +29,6 @@ function handler() {
 
 module.exports = handler;
 
-var baseURL = 'http://localhost:8000';
+// var baseURL = 'http://localhost:8000';
 // var baseURL = 'http://114.215.29.0:8000';
+var baseURL = 'http://ali.shangpinmatou.com:8000';
