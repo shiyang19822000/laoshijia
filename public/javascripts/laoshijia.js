@@ -23,7 +23,10 @@ $(function () {
         template: function (response) {
             var markup = '';
             for (var i = 0; i < response.results.length; i++) {
-                markup = picwall(response.results[i].full, response.results[i].thumb, markup)
+                if (response.results[i].category == 0)
+                    markup = picwall(response.results[i].full, response.results[i].thumb, markup);
+                if (response.results[i].category == 1)
+                    markup = videowall(response.results[i].full, markup);
                 markup = wordswall(response.results[i].id, response.results[i].title, response.results[i].desc, markup);
             };
             return markup;
@@ -112,6 +115,19 @@ function picwall(full, thumb, markup) {
     return markup;
 };
 
+function videowall(video, markup) {
+    markup += '<video controls="controls" autoplay="autoplay" class="6u 12u$(xsmall) work-item">';
+    // markup += '<source src="22.ogg" type="video/ogg" />';
+    markup += '<source src="' + video + '" type="video/mp4" />';
+    markup += '</video>';
+    return markup;
+    // <video controls="controls" autoplay="autoplay">
+    //     <source src="22.ogg" type="video/ogg" />
+    //     <source src="22.mp4" type="video/mp4" />
+    //     Your browser does not support the video tag.
+    // </video>
+}
+
 function recall() {
     $.ajax({
         type: "get",
@@ -120,7 +136,11 @@ function recall() {
         success: function (response) {
             var markup = '';
             for (var i = 0; i < response.results.length; i++) {
-                markup = picwall(response.results[i].full, response.results[i].thumb, markup)
+                if (response.results[i].category == 0)
+                    markup = picwall(response.results[i].full, response.results[i].thumb, markup);
+                if (response.results[i].category == 1)
+                    markup = videowall(response.results[i].full, markup);
+                // markup = picwall(response.results[i].full, response.results[i].thumb, markup)
                 markup = wordswall(response.results[i].id, response.results[i].title, response.results[i].desc, markup);
             };
             $("#two .row").html(markup);
